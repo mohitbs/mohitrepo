@@ -1,0 +1,28 @@
+CLONING A REPOSITORY:
+	git clone https://github.com/mohitbs/mohitrepo.git
+
+SETUP GIT ENVIRONMENT:
+	Setup username and email:
+		git config --global user.name "mohit"
+		git config --global user.email "mohitbs1@gmail.com"
+		
+	Setup Color output
+		git config --global color.ui auto
+
+GET GIT HELP:
+	git help
+	git help <command> eg. git help commit
+		
+ADD FOLDERS AND FILES:
+	git add <path>
+	
+COMMIT FILES AND FOLDERS
+	git commit
+	git commit -m <Message>
+	
+CHECK STATUS ( MODIFIED/OPENED FILES )
+	git status
+
+GET LOG
+	git log
+	
