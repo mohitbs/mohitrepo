@@ -25,4 +25,7 @@ CHECK STATUS ( MODIFIED/OPENED FILES )
 
 GET LOG
 	git log
-	
+
+GIT SYNC WITH REMOTE
+	git push 
+	git pull	
