@@ -29,5 +29,7 @@ target.write("\n")
 target.write(line3)
 target.write("\n")
 
+target.write("%s\n%s\n%s\n" % (line1,line2,line3))
+
 print "And finanlly, we close it."
 target.close()
