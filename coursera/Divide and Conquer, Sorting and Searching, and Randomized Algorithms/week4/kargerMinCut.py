@@ -1,66 +1,48 @@
-import random
-import copy
+from random import randint
 
-with open('kargerMinCut.txt') as f:
-    #kargerMinCut
-    #a = [[int(x) for x in ln.split()] for ln in f]
-    data_set = []
-    for ln in f:
-        line = ln.split()
-        if line:
-            a = [int(x) for x in line]
-            data_set.append(a)
 
-def choose_random_edge(data):
-    a = random.randint(0,len(data)-1)
-    b = random.randint(1,len(data[a])-1)
-    return a,b
+class KargerMinCutter:
+    def __init__(self, graph_file):
+        self._graph = {}
+        self._total_edges = 0
+        with open(graph_file) as file:
+            for index, line in enumerate(file):
+                numbers = [int(number) for number in line.split()]
+                self._graph[numbers[0]] = numbers[1:]
+                self._total_edges += len(numbers[1:])
 
-def compute_nodes(data):
-    data_head = []
-    for i in xrange(len(data)):
-        data_head.append(data[i][0])
-    return data_head
+    def find_min_cut(self):
+        min_cut = 0
+        while len(self._graph) > 2:
+            v1, v2 = self._pick_random_edge()
+            self._total_edges -= len(self._graph[v1])
+            self._total_edges -= len(self._graph[v2])
+            self._graph[v1].extend(self._graph[v2])
+            for vertex in self._graph[v2]:
+                self._graph[vertex].remove(v2)
+                self._graph[vertex].append(v1)
+            self._graph[v1] = list(filter(lambda v: v != v1, self._graph[v1]))
+            self._total_edges += len(self._graph[v1])
+            self._graph.pop(v2)
+        for edges in self._graph.values():
+            min_cut = len(edges)
+        return min_cut
 
-def find_index(data_head,data,u,v):
-    index = data_head.index(data[u][v])
-    return index
+    def _pick_random_edge(self):
+        rand_edge = randint(0, self._total_edges - 1)
+        for vertex, vertex_edges in self._graph.items():
+            if len(vertex_edges) <= rand_edge:
+                rand_edge -= len(vertex_edges)
+            else:
+                from_vertex = vertex
+                to_vertex = vertex_edges[rand_edge]
+                return from_vertex, to_vertex
 
-def replace(data_head,data,index,u):
-    for i in data[index][1:]:
-        index_index = data_head.index(i)
-        for position,value in enumerate(data[index_index]):
-            if value == data[index][0]:
-                data[index_index][position] = data[u][0]
-    return data
-    
-def merge(data):
-    u,v = choose_random_edge(data)
-    #print u,v
-    data_head = compute_nodes(data)
-    index = find_index(data_head,data,u,v)
-    data[u].extend(data[index][1:])
-    #print data
-    data = replace(data_head,data,index,u)
-    #print data
-    data[u][1:] = [x for x in data[u][1:] if x!=data[u][0]]
-    #print data
-    data.remove(data[index])
-    #print data
-    return data
-
-def KargerMinCut(data):
-    
-    data = copy.deepcopy(data)
-    while len(data) >2:
-        data = merge(data)
-        #print data
-    num = len(data[0][1:])
-    return num
-
-#KargerMinCut(data_set)
-def calc_number(data,iteration):
-    list = []
-    for i in xrange(iteration):
-        list.append(KargerMinCut(data))
-    return min(list)
+if __name__ == "__main__":
+    min_cut = 99999
+    for i in range(40000):
+        min_cutter = KargerMinCutter('assignment3.txt')
+        cut = min_cutter.find_min_cut()
+        if cut < min_cut:
+            min_cut = cut
+        print(min_cut)
