@@ -1,0 +1,62 @@
+ EMACS BASIC COMMANDS
+
+GENERAL:
+c-x c-c		Quit Emacs
+c-g 	     	Quit Current Command
+m-x	     	Run an Emacs Command
+
+FILE OPERATIONS:
+c-x c-f		Open File/Create File
+c-x d           Open Directory
+c-x k  	     	Close File Without Saving
+c-x c-s	      	Save File
+c-x c-w         Save As
+
+FILE EDITING
+c-x u		Undo
+c-/ 
+Shift-Del	Cut
+c-w
+c-Ins		Copy
+m-w
+Shift-Ins	Paste
+c-y
+TAB		Indent Line
+
+BUFFERS
+c-x <c-right>	Next Right Buffer
+c-x <c-left>	Next Left Buffer
+c-x b		Select Named Buffer
+c-x c-b		Get a list of Buffers
+
+SCREEN
+c-x 2		Split Screen Horizontally
+c-x o		Switch to other screen
+c-x 1		Close Other Split Screen
+c-x 3		Split Screen Vertically
+
+FRAMES
+c-x 5 2		New Frame
+c-x 5 0		Close Frame
+
+NAVIGATION
+c-f		Forward One Char
+c-b		Backward One Char
+m-f		Forward One Word
+m-b		Backward One Word
+c-v		Scroll Up
+m-v		Scroll Down
+c-home		Beginning of Buffer
+c-end		End of Buffer
+
+SEARCH AND REPLACE
+c-s             Search
+c-r             Reverse Search
+m-%             Replace
+c-x r k		Column delete
+c-x r t		Column Replace
+c-x r y 	Column Insert
+
+
+CODE COMMENT
+m-;
